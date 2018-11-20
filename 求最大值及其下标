@@ -1,0 +1,54 @@
+本题要求编写程序，找出给定的n个数中的最大值及其对应的最小下标（下标从0开始）。
+
+输入格式:
+输入在第一行中给出一个正整数n（1<n≤10）。第二行输入n个整数，用空格分开。
+
+输出格式:
+在一行中输出最大值及最大值的最小下标，中间用一个空格分开。
+
+#include<iostream>
+using namespace std;
+
+const int MAXSIZE = 100;
+//建立顺序表结构体
+typedef struct{
+	int elem[MAXSIZE];
+	int length;
+}SqList; 
+//建立顺序表存储数据
+void CreateList(SqList &L,int n) 
+{
+	for(int i = 0;i < n;i++)
+	{
+		cin>>L.elem[i];
+	}
+	L.length = n;
+}
+//求最大值及其最小下标函数
+void FindMax(SqList L)
+{
+	//index记录最大值的最小下标 ，max记录最大值 
+	int index = 0;
+	int max = L.elem[0]; 
+	for(int i = 0;i < L.length;i++)
+	{
+		if(L.elem[i] > max)
+		{
+			index = i;
+			max = L.elem[i];
+		}
+	}
+	cout<<max<<" "<<index;
+}
+
+int main()
+{
+	SqList L;
+	int n;
+	cin>>n;
+	
+	CreateList(L,n);
+	FindMax(L);
+
+	return 0;
+}
