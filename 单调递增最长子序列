@@ -1,0 +1,48 @@
+设计一个O(n2)时间的算法，找出由n个数组成的序列的最长单调递增子序列。
+
+输入格式:
+输入有两行： 第一行：n，代表要输入的数列的个数 第二行：n个数，数字之间用空格格开
+
+输出格式:
+最长单调递增子序列的长度
+
+#include<iostream>
+using namespace std;
+
+int compute_length(int a[],int n)
+{
+	int *d = new int [n];
+	int MAX_length = 1;
+	for(int i = 0;i < n;i++)
+	{
+		d[i] = 1;
+		for(int j = 0;j < i;j++)
+		{
+			if(a[j] <= a[i] && d[j] + 1 > d[i])
+			{
+				d[i] = d[j] + 1;
+			}
+			if(d[i] > MAX_length)
+			{
+				MAX_length = d[i];
+			}
+		}
+	}
+	delete[] d;
+	return MAX_length;
+}
+
+int main()
+{
+	int n;
+	cin>>n;
+	int a[n];
+	for(int i = 0;i < n;i++)
+	{
+		cin>>a[i];
+	}
+	
+	int ans = compute_length(a,n);
+	cout<<ans<<endl;
+	return 0;
+} 
